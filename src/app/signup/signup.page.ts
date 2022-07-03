@@ -10,6 +10,10 @@ export class SignupPage implements OnInit {
   public email:any;
   public password:any;
   public name:any;
+  public imageURL :string = 'http://www.4x4.ec/overlandecuador/wp-content/uploads/2017/06/default-user-icon-8.jpg';
+  public rol : string= "";
+  public image_reference: string= "";
+  
   constructor(
     public fireService:FireserviceService
   ) { }
@@ -24,7 +28,10 @@ export class SignupPage implements OnInit {
           email:this.email,
           password:this.password,
           name:this.name,
-          uid:res.user.uid
+          uid:res.user.uid,
+          imageURL: this.imageURL,
+          image_reference: this.image_reference,
+          rol: this.rol,
         }
         this.fireService.saveDetails(data).then(res=>{
          alert('Account Created!');
@@ -37,6 +44,12 @@ export class SignupPage implements OnInit {
 
       console.log(err);
     })
+  }
+  turista(){
+    this.rol= "turista"
+  }
+  encargado(){
+    this.rol= "encargado"
   }
 
 }

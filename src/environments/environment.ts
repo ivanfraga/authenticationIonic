@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
   
-  firebase : {
-    apiKey: "AIzaSyC4qFMAaxYhbhAfFtJIvMNLO9LJQudx9oNE",
-    authDomain: "myblog-e1d4e.firebaseapp.com",
-    projectId: "myblog-e1d4xe",
-    storageBucket: "myblog-e1d4e.appspot.com",
-    messagingSenderId: "754023951063",
-    appId: "1:754023951063:web:9aac567d9c94265880dex92",
-    measurementId: "G-05PDZ051WxX"
-  }
+  firebase: {
+    apiKey: "AIzaSyCHG-vQN1R6m5PQMmMWpuM6Atqyl3KeJo8",
+    authDomain: "appweb-bcd38.firebaseapp.com",
+    databaseURL: "https://appweb-bcd38-default-rtdb.firebaseio.com",
+    projectId: "appweb-bcd38",
+    storageBucket: "appweb-bcd38.appspot.com",
+    messagingSenderId: "267983699764",
+    appId: "1:267983699764:web:90cdbf12ded0ccf0086f61"
+  },
 };
 
 
