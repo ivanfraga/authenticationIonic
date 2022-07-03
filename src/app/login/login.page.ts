@@ -10,6 +10,7 @@ import { FireserviceService } from '../fireservice.service';
 export class LoginPage implements OnInit {
   public email:any;
   public password:any;
+  public usuario: any;
 
   constructor(
     public router:Router,
@@ -23,10 +24,30 @@ export class LoginPage implements OnInit {
   login(){
     this.fireService.loginWithEmail({email:this.email,password:this.password}).then(res=>{
       console.log(res);
+      
       if(res.user.uid){
         this.fireService.getDetails({uid:res.user.uid}).subscribe(res=>{
           console.log(res);
-          alert('Welcome '+ res['name']);
+          this.usuario= res;
+          //alert('Welcome '+ res['name']);
+          switch(this.usuario.rol) { 
+            case "administrador": { 
+              this.router.navigateByUrl(`admin/${this.usuario.uid}`)
+               break; 
+            } 
+            case "turista": { 
+              this.router.navigateByUrl(`turista/${this.usuario.uid}`)
+               break; 
+            } 
+            case "encargado": { 
+              this.router.navigateByUrl(`encargado/${this.usuario.uid}`)
+              break; 
+           }
+            default: { 
+               alert("revisa que el usuario tenga rol")
+               break; 
+            } 
+         } 
         },err=>{
           console.log(err);
         });

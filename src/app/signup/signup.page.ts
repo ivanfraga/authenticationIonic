@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FireserviceService } from '../fireservice.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class SignupPage implements OnInit {
   public image_reference: string= "";
   
   constructor(
+    public router:Router,
     public fireService:FireserviceService
   ) { }
 
@@ -35,6 +37,24 @@ export class SignupPage implements OnInit {
         }
         this.fireService.saveDetails(data).then(res=>{
          alert('Account Created!');
+         switch(data.rol) { 
+          case "administrador": { 
+            this.router.navigateByUrl(`admin/${data.uid}`)
+             break; 
+          } 
+          case "turista": { 
+            this.router.navigateByUrl(`turista/${data.uid}`)
+             break; 
+          } 
+          case "encargado": { 
+            this.router.navigateByUrl(`encargado/${data.uid}`)
+            break; 
+         }
+          default: { 
+             alert("revisa que el usuario tenga rol")
+             break; 
+          } 
+       } 
         },err=>{
           console.log(err);
         })
@@ -50,6 +70,13 @@ export class SignupPage implements OnInit {
   }
   encargado(){
     this.rol= "encargado"
+  }
+
+  inicioSecion(){
+    this.router.navigateByUrl('encargado');
+  }
+  logout(){
+    this.router.navigateByUrl('');
   }
 
 }

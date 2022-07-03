@@ -13,7 +13,21 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+  },
+  {
+    path: 'turista/:id',
+    loadChildren: () => import('./dashboard/turista/turista.module').then( m => m.TuristaPageModule)
+  },
+  {
+    path: 'encargado/:id',
+    loadChildren: () => import('./dashboard/encargado/encargado.module').then( m => m.EncargadoPageModule)
+  },
+  {
+    path: 'admin/:id',
+    loadChildren: () => import('./dashboard/admin/admin.module').then( m => m.AdminPageModule)
   }
+
+
 ];
 @NgModule({
   imports: [
