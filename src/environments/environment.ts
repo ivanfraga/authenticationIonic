@@ -4,18 +4,16 @@
 
 export const environment = {
   production: false,
-  
+
   firebase: {
-    apiKey: "AIzaSyCHG-vQN1R6m5PQMmMWpuM6Atqyl3KeJo8",
-    authDomain: "appweb-bcd38.firebaseapp.com",
-    databaseURL: "https://appweb-bcd38-default-rtdb.firebaseio.com",
-    projectId: "appweb-bcd38",
-    storageBucket: "appweb-bcd38.appspot.com",
-    messagingSenderId: "267983699764",
-    appId: "1:267983699764:web:90cdbf12ded0ccf0086f61"
+    apiKey: 'AIzaSyC44ZaV-jpPOsAG4gn9zmfG1f14WaiB5UM',
+    authDomain: 'ionic-login-1d860.firebaseapp.com',
+    projectId: 'ionic-login-1d860',
+    storageBucket: 'ionic-login-1d860.appspot.com',
+    messagingSenderId: '567942950804',
+    appId: '1:567942950804:web:cb464d3f001ad71b626981',
   },
 };
-
 
 /*
  * For easier debugging in development mode, you can import the following file

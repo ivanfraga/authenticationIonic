@@ -1,65 +1,77 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FireserviceService } from '../fireservice.service';
-
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  public email:any;
-  public password:any;
-  public usuario: any;
+  // public email: any;
+  // public password: any;
+   public usuario: any;
+  public userForm: FormGroup;
 
   constructor(
-    public router:Router,
-    public fireService:FireserviceService
-  ) { }
-
-  ngOnInit() {
+    public router: Router,
+    public fireService: FireserviceService,
+    public formBuilder: FormBuilder
+  ) {
+    this.userForm = this.formBuilder.group({
+      email: [''],
+      password: [''],
+    });
   }
 
+  ngOnInit() {}
 
-  login(){
-    this.fireService.loginWithEmail({email:this.email,password:this.password}).then(res=>{
-      console.log(res);
-      
-      if(res.user.uid){
-        this.fireService.getDetails({uid:res.user.uid}).subscribe(res=>{
+  login() {
+    this.fireService
+      .loginWithEmail({ email: this.userForm.get('email').value, password: this.userForm.get('password').value })
+      .then(
+        (res) => {
           console.log(res);
-          this.usuario= res;
-          //alert('Welcome '+ res['name']);
-          switch(this.usuario.rol) { 
-            case "administrador": { 
-              this.router.navigateByUrl(`admin/${this.usuario.uid}`)
-               break; 
-            } 
-            case "turista": { 
-              this.router.navigateByUrl(`turista/${this.usuario.uid}`)
-               break; 
-            } 
-            case "encargado": { 
-              this.router.navigateByUrl(`encargado/${this.usuario.uid}`)
-              break; 
-           }
-            default: { 
-               alert("revisa que el usuario tenga rol")
-               break; 
-            } 
-         } 
-        },err=>{
+
+          if (res.user.uid) {
+            this.fireService.getDetails({ uid: res.user.uid }).subscribe(
+              (res) => {
+                console.log(res);
+                this.usuario = res;
+                //alert('Welcome '+ res['name']);
+                switch (this.usuario.rol) {
+                  case 'administrador': {
+                    this.router.navigateByUrl(`admin/${this.usuario.uid}`);
+                    break;
+                  }
+                  case 'turista': {
+                    this.router.navigateByUrl(`turista/${this.usuario.uid}`);
+                    break;
+                  }
+                  case 'encargado': {
+                    this.router.navigateByUrl(`encargado/${this.usuario.uid}`);
+                    break;
+                  }
+                  default: {
+                    alert('revisa que el usuario tenga rol');
+                    break;
+                  }
+                }
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          }
+        },
+        (err) => {
+          alert(err.message);
           console.log(err);
-        });
-      }
-    },err=>{
-      alert(err.message)
-      console.log(err);
-    })
+        }
+      );
   }
 
-
-  signup(){
+  signup() {
     this.router.navigateByUrl('signup');
   }
 }
