@@ -13,11 +13,11 @@ export class FireserviceService {
     public router: Router
   ) {}
   loginWithEmail(data) {
-    return this.auth.signInWithEmailAndPassword(data.email, data.password);
+    return this.auth.signInWithEmailAndPassword(data.mail, data.password);
   }
 
   signup(data) {
-    return this.auth.createUserWithEmailAndPassword(data.email, data.password);
+    return this.auth.createUserWithEmailAndPassword(data.mail, data.password);
   }
 
   saveDetails(data) {

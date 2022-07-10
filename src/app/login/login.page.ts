@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FireserviceService } from '../fireservice.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,18 +12,25 @@ export class LoginPage implements OnInit {
   public email:any;
   public password:any;
   public usuario: any;
+  public userForm: FormGroup;
 
   constructor(
+    public formBuilder: FormBuilder,
     public router:Router,
     public fireService:FireserviceService
-  ) { }
+  ) {
+    this.userForm= this.formBuilder.group({
+      mail: [''],
+      password: [''],
+    })
+   }
 
   ngOnInit() {
   }
 
 
   login(){
-    this.fireService.loginWithEmail({email:this.email,password:this.password}).then(res=>{
+    this.fireService.loginWithEmail(this.userForm.value).then(res=>{
       console.log(res);
       
       if(res.user.uid){

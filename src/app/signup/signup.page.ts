@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FireserviceService } from '../fireservice.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-signup',
@@ -14,19 +16,32 @@ export class SignupPage implements OnInit {
   public imageURL :string = 'http://www.4x4.ec/overlandecuador/wp-content/uploads/2017/06/default-user-icon-8.jpg';
   public rol : string= "";
   public image_reference: string= "";
+  public registerForm: FormGroup;
+  public user:any;
   
   constructor(
+    public formBuilder: FormBuilder,
     public router:Router,
     public fireService:FireserviceService
-  ) { }
+  ) {
+    this.registerForm= this.formBuilder.group({
+      mail: [''],
+      password: [''],
+      name: [''],
+      imageURL: ['http://www.4x4.ec/overlandecuador/wp-content/uploads/2017/06/default-user-icon-8.jpg'],
+      rol: [''],
+      image_reference: [''],
+      uid: [''],
+    })
+   }
 
   ngOnInit() {
   }
 
   signup(){ 
-    this.fireService.signup({email:this.email,password:this.password}).then(res=>{
+    this.fireService.signup(this.registerForm.value).then(res=>{
       if(res.user.uid){
-        let data = {
+        /*let data = {
           email:this.email,
           password:this.password,
           name:this.name,
@@ -34,10 +49,14 @@ export class SignupPage implements OnInit {
           imageURL: this.imageURL,
           image_reference: this.image_reference,
           rol: this.rol,
-        }
+        }*/
+        this.registerForm.get('uid').setValue(res.user.uid);
+        let data= this.registerForm.value
         this.fireService.saveDetails(data).then(res=>{
+          this.user= res;
+          
          alert('Account Created!');
-         switch(data.rol) { 
+         switch(this.registerForm.get('rol').value) { 
           case "administrador": { 
             this.router.navigateByUrl(`admin/${data.uid}`)
              break; 
@@ -66,10 +85,10 @@ export class SignupPage implements OnInit {
     })
   }
   turista(){
-    this.rol= "turista"
+    this.registerForm.get('rol').setValue('turista');
   }
   encargado(){
-    this.rol= "encargado"
+    this.registerForm.get('rol').setValue('encargado');
   }
 
   inicioSecion(){

@@ -4,17 +4,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
+  <form [formGroup]="userForm" (ngSubmit)="login()" novalidate>
   <div class="form">
 
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
-      <ion-input [(ngModel)]='email'></ion-input>
+      <ion-input formControlName="mail" type="email" class="form-control"></ion-input>
     </ion-item>
     <br>
 
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
-      <ion-input [(ngModel)]='password'></ion-input>
+      <ion-input formControlName="password" type="password" class="form-control"></ion-input>
     </ion-item>
 
     <ion-button (click)='login()' expand='block'>Login</ion-button>
@@ -24,4 +25,5 @@
     </h5>
     
   </div>
+  </form>
 </ion-content>

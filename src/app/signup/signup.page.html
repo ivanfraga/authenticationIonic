@@ -8,19 +8,19 @@
 </ion-header>
 
 <ion-content class="ion-pading">
-  <div class="form">
+  <form [formGroup]="registerForm" (ngSubmit)="signup()" novalidate>
     <ion-item>
       <ion-label position="stacked">Name</ion-label>
-      <ion-input [(ngModel)]='name'></ion-input>
+      <ion-input formControlName="name" type="text" class="form-control"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
-      <ion-input [(ngModel)]='email'></ion-input>
+      <ion-input formControlName="mail" type="email" class="form-control"></ion-input>
     </ion-item>
     <br>
     <ion-item>
       <ion-label position="stacked">Password</ion-label>
-      <ion-input [(ngModel)]='password'></ion-input>
+      <ion-input formControlName="password" type="password" class="form-control"></ion-input>
     </ion-item>
     Seleccionar rol
     <ion-item>
@@ -31,5 +31,5 @@
 
     <ion-button (click)='signup()' expand='block'>Signup</ion-button>
     <ion-button (click)='logout()' expand='block'>Inicio de sesión</ion-button>
-  </div>
+  </form>
 </ion-content>
