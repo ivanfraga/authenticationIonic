@@ -32,11 +32,11 @@
     <ion-button (click)='encargado()' expand='block'>Encargado</ion-button>
     <br>
 
-    <ion-item *ngFor="let name of people; let i=index">
+    <!-- <ion-item *ngFor="let name of people; let i=index">
       <ion-label (ionSelect)="setPerson($event)">{{name.name}}</ion-label>
       <ion-radio (ionSelect)="setPerson($event)" value="{{name.value}}">
       </ion-radio>
-    </ion-item>
+    </ion-item> -->
 
     <ion-button (click)='signup()' expand='block'>Signup</ion-button>
     <ion-button (click)='logout()' expand='block' color="secondary">Inicio de sesión</ion-button>
